@@ -16,12 +16,18 @@ RUN apt-get update \
        php7.3-imap php-memcached php7.3-mbstring php7.3-xml php7.3-curl \
        php7.3-sqlite3 php7.3-zip php7.3-pdo-dblib php7.3-bcmath \
     && php -r "readfile('http://getcomposer.org/installer');" | php -- --install-dir=/usr/bin/ --filename=composer \
-    && mkdir /run/php \
-    && apt-get remove -y --purge software-properties-common \
-    && apt-get -y autoremove \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
-    && echo "daemon off;" >> /etc/nginx/nginx.conf
+    && mkdir /run/php
+
+RUN curl -fsSL https://get.docker.com -o get-docker.sh
+
+RUN sh get-docker.sh
+
+RUN apt-get remove -y --purge software-properties-common \
+	&& apt-get -y autoremove \
+	&& apt-get clean \
+	&& rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
+	&& echo "daemon off;" >> /etc/nginx/nginx.conf
+
 
 RUN ln -sf /dev/stdout /var/log/nginx/access.log \
     && ln -sf /dev/stderr /var/log/nginx/error.log
