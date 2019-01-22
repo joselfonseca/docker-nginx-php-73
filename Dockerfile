@@ -18,6 +18,12 @@ RUN apt-get update \
     && php -r "readfile('http://getcomposer.org/installer');" | php -- --install-dir=/usr/bin/ --filename=composer \
     && mkdir /run/php
 
+RUN curl -sL https://deb.nodesource.com/setup_10.x -o nodesource_setup.sh
+
+RUN sh nodesource_setup.sh
+
+RUN apt-get install -y nodejs build-essential
+
 RUN curl -fsSL https://get.docker.com -o get-docker.sh
 
 RUN sh get-docker.sh
