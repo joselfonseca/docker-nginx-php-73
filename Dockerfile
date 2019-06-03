@@ -43,6 +43,8 @@ COPY php-fpm.conf /etc/php/7.3/fpm/php-fpm.conf
 
 COPY www.conf /etc/php/7.3/fpm/pool.d/www.conf
 
+COPY php.ini /etc/php/7.3/fpm/php.ini
+
 EXPOSE 80
 
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
