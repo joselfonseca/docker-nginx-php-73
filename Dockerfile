@@ -17,16 +17,6 @@ RUN apt-get update \
 
 RUN update-ca-certificates;
 
-RUN curl -sL https://deb.nodesource.com/setup_10.x -o nodesource_setup.sh
-
-RUN sh nodesource_setup.sh
-
-RUN apt-get install -y nodejs build-essential
-
-RUN curl -fsSL https://get.docker.com -o get-docker.sh
-
-RUN sh get-docker.sh
-
 RUN apt-get remove -y --purge software-properties-common \
 	&& apt-get -y autoremove \
 	&& apt-get clean \
