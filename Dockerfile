@@ -11,9 +11,14 @@ RUN apt-get update \
     && apt-get update \
     && apt-get install -y php7.3-fpm php7.3-cli php7.3-gd php7.3-mysql \
        php7.3-imap php-memcached php7.3-mbstring php7.3-xml php7.3-curl \
-       php7.3-sqlite3 php7.3-zip php7.3-pdo-dblib php7.3-bcmath php7.3-ssh2 \
+       php7.3-sqlite3 php7.3-zip php7.3-pdo-dblib php7.3-bcmath php7.3-ssh2 php7.3-dev php-pear \
     && php -r "readfile('http://getcomposer.org/installer');" | php -- --install-dir=/usr/bin/ --filename=composer \
     && mkdir /run/php
+
+RUN pecl install grpc
+
+RUN echo "extension=grpc.so" >> /etc/php/7.3/cli/conf.d/20-grpc.ini
+RUN echo "extension=grpc.so" >> /etc/php/7.3/fpm/conf.d/20-grpc.ini
 
 COPY datadog-php-tracer.deb /datadog-php-tracer.deb
 
