@@ -15,9 +15,9 @@ RUN apt-get update \
     && php -r "readfile('http://getcomposer.org/installer');" | php -- --install-dir=/usr/bin/ --filename=composer \
     && mkdir /run/php
 
-COPY datadog-php-tracer.deb /datadog-php-tracer.deb
+COPY datadog-php-tracer_0.41.1_amd64.deb /datadog-php-tracer_0.41.1_amd64.deb
 
-RUN dpkg -i datadog-php-tracer.deb \
+RUN dpkg -i datadog-php-tracer_0.41.1_amd64.deb \
     && update-ca-certificates \
     && apt-get remove -y --purge software-properties-common \
     && apt-get -y autoremove \
